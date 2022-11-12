@@ -4,7 +4,8 @@ var router = express.Router();
 const create = require('../controller/createController');
 const update = require('../controller/updateController');
 const del = require('../controller/deleteController');
-const read = require('../controller/readController')
+const read = require('../controller/readController');
+const {body} = requie('express-validator');
 //PREFIX = /node
 
 /* GET home page. */
@@ -16,14 +17,18 @@ module.exports = router;
 
 //CREATE
 //Create node with label and properties
-router.post('/:label', create.node)
+
+router.post('/', body('label').custom(value =>{
+  if (value == null) {return Promise.reject("Every node must be created with a label")}
+}),
+create.node)
 
 //PUT
 //Update a node's properties
 router.put('/properties/:id', update.node)
 
 //Update a node's label
-router.put('/labels/:id/:label', update.nodeLabel)
+router.put('/labels/:id', update.nodeLabel)
 
 //DELETE
 //Delete a node with its relationships

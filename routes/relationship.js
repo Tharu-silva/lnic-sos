@@ -4,6 +4,8 @@ const create = require('../controller/createController');
 const update = require('../controller/updateController');
 const del = require('../controller/deleteController');
 const read = require('../controller/readController')
+const {body} = require('express-validator');
+const util = require('../util')
 
 
 //PREFIX = /relationship
@@ -15,7 +17,19 @@ router.get('/', function(req, res, next) {
 module.exports = router;
 
 //CREATE
-router.post('/',create.relationship)
+router.post('/',
+body('start').isNumeric().custom(value => {
+  util.findNodeById(value).catch((error) => {
+    Promise.reject('Start node does not exist')
+  })
+}), 
+body('end').isNumeric().custom(value => {
+  util.findNodeById(value).catch((error) => {
+    Promise.reject('End node does not exist')
+  })
+}), 
+body('type').notEmpty(),
+create.relationship)
 
 //UPDATE
 //Update the properties of a relationship
