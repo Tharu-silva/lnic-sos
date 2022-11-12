@@ -1,11 +1,13 @@
 var express = require('express');
 const router = require('../router');
 var router = express.Router();
-const create = require('../controller/createController');
-const update = require('../controller/updateController');
-const del = require('../controller/deleteController');
-const read = require('../controller/readController');
+const create = require('../controllers/createController');
+const update = require('../controllers/updateController');
+const del = require('../controllers/deleteController');
+const read = require('../controllers/readController');
 const {body} = requie('express-validator');
+const util = require('../util')
+
 //PREFIX = /node
 
 /* GET home page. */
@@ -25,10 +27,22 @@ create.node)
 
 //PUT
 //Update a node's properties
-router.put('/properties/:id', update.node)
+router.put('/properties',
+body("id").isNumeric().custom(value => {
+  util.findNodeById(value).catch((error) => {
+    Promise.reject('Node does not exist')
+  })
+}),
+update.node)
 
 //Update a node's label
-router.put('/labels/:id', update.nodeLabel)
+router.put('/labels',
+body("id").isNumeric().custom(value => {
+  util.findNodeById(value).catch((error) => {
+    Promise.reject('Node does not exist')
+  })
+}),  
+update.nodeLabel)
 
 //DELETE
 //Delete a node with its relationships

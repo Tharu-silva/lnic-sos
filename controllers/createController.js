@@ -14,9 +14,9 @@ exports.node = async (req,res,next) => {
 
   //Find superkey collisions
   //Transform params to required format
-  const label = req.params.label.toUpperCase()
-  delete req.params.label;
-  const properties = req.params
+  const label = req.query.label.toUpperCase()
+  delete req.query.label;
+  const properties = req.query
   //Add the node to database
   const response = await session.executeWrite(
     tx => tx.run(
@@ -42,19 +42,19 @@ exports.relationship = async (req,res,next) => {
   }
   //Add relationship using merge
   const session = driver.session()
-  const label = req.params.label.toUpperCase()
+  const label = req.query.label.toUpperCase()
 
-  const res = await session.executeWrite(
+  const response = await session.executeWrite(
     tx => tx.run(
       `MERGE (n1) -[r:${label}]-> (n2)
-      WHERE id(n1) = ${req.params.start} AND id(n2) = ${req.params.end}
+      WHERE id(n1) = ${req.query.start} AND id(n2) = ${req.query.end}
       return r`
     )
   )
 
   await session.close()
 
-  const createdRelationship = r.records.get(label)
+  const createdRelationship = response.records.get(label)
   res.state(200).json(createdRelationship)
 }
 

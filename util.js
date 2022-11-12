@@ -15,9 +15,26 @@ export async function findNodeById(id) {
     tx => tx.run(
       `
       MATCH (n) where id(n) = ${id}
+      RETURN n
       `
     )
   )
 
-  //TODO: Find a way to validatae whether the node exists
+  //TODO: Find a way to validate whether the node exists
 }
+
+export async function findRelationshipById(id) {
+  const session = driver.session()
+
+  const res = await session.executeRead(
+    tx => tx.run(
+      `
+      MATCH (n) -[r]-> (m) where id(r) = ${id}
+      RETURN n
+      `
+    )
+  )
+
+  //TODO: Find a way to validate whether the node exists
+}
+

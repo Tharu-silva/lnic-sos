@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-const create = require('../controller/createController');
-const update = require('../controller/updateController');
-const del = require('../controller/deleteController');
-const read = require('../controller/readController')
+const create = require('../controllers/createController');
+const update = require('../controllers/updateController');
+const del = require('../controllers/deleteController');
+const read = require('../controllers/readController')
 const {body} = require('express-validator');
 const util = require('../util')
 
@@ -31,11 +31,16 @@ body('end').isNumeric().custom(value => {
 body('type').notEmpty(),
 create.relationship)
 
-//UPDATE
-//Update the properties of a relationship
-router.post('/properties/:id', update.relationship)
-//Update existing relationship with certain type
-router.post('/properties/type/:id/:type', update.relationshipType)
+//PUT
+//Update the property of a relationship
+router.post('/properties',
+body('id').isNumeric().custom(value => {
+  util.findRelationshipById(value).catch((error) => {
+    Promise.reject('Relationship does not exist')
+  })
+}),
+update.relationship)
+
 
 //DELETE 
 //Delete a node
