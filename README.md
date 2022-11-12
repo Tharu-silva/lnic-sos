@@ -1,2 +1,2 @@
 # lnic-sos
-Land network intergration center system of systemss
+Land network intergration center system of systems
