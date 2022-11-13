@@ -2,7 +2,7 @@
 
 ### GET
 
-`/graph` Fetches the collection of nodes and relationships <br><br>
+`/graph` Fetches the collection of nodes and relationshipss <br><br>
 
 `/graph/shortestpath?start=&end=` Fetches an array of nodes that make up the shortest path from one node to the other node <br><br>
 
