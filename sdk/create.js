@@ -16,7 +16,7 @@ import { getGraph } from './read'
   const nodeId = addedNode.nodes[0].id
 
   //Add connection to central node
-  createRelationship(nodeId, platformID, 'PLATFORM')
+  createRelationship("PLATFORM",{},nodeId, platformID)
 
   //Return graph
   const graph = await getGraph()
