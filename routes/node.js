@@ -10,7 +10,7 @@ const util = require('../util')
 
 //PREFIX = /node
 //Create node with label and properties
-router.get('/',create.node)
+router.post('/',create.node)
 
 
 //Update a node's properties
