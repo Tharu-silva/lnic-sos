@@ -19,7 +19,7 @@ router.put('/labels', update.nodeLabel)
 
 
 //Delete a node with its relationships
-router.delete('/', del.node)
+router.post('/delete', del.node)
 //Delete node label
 router.delete('/labels', del.nodeLabel)
 //Delete a node's properties

@@ -27,16 +27,16 @@ export default function App() {
     nodeHighlightBehavior: true,
     directed: true,
     height: 800,
-    width: 800,
+    width: 900,
     d3: {
       disableLinkForce: false,
-      gravity: -300,
+      gravity: -200,
       alphaTarget: 1,
     },
     node: {
       labelProperty: getLabel,
       color: "green",
-      size: 600,
+      size: 700,
       highlightStrokeColor: "blue",
     },
     link: {
@@ -54,6 +54,7 @@ export default function App() {
         `Clicked node (ID: ${nodeId}) is a Platform - creating a system node that references that platform node`
       );
       createSystemNode(nodeId);
+      
     } else if (labels.includes("SYSTEM")) {
       setIsHidden(false);
       setText(

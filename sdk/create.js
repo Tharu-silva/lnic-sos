@@ -1,4 +1,4 @@
-import { fetchData } from './global'
+const global = require('./')
 import update from './update'
 import { getGraph } from './read'
 

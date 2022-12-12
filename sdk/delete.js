@@ -8,9 +8,9 @@ const global = require('./global')
  */
 
 exports.deleteSystemNode = async (id) => {
-  let urlStr = `http://localhost:3001/node?id=${id}`
+  let urlStr = `http://localhost:3001/node/delete?id=${id}`
 
-  const data = await global.fetchData(urlStr, 'DELETE')
+  const data = await global.fetchData(urlStr, 'POST')
   return data
 }
 

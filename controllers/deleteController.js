@@ -19,7 +19,7 @@ exports.node = async (req,res,next) => {
       //Delete all system connections on the node
       const query1 = 
       `
-      MATCH (n) -[s:SYSTEM]-> (k)
+      MATCH (n) <-[s:PLATFORM]- (k)
       WHERE id(n) = ${req.query.id}
       DELETE k,s
       RETURN k,s

@@ -1,10 +1,6 @@
 const { profileEnd } = require('console');
-const helper = require('./helper')
+const del = require('./frontend/src/sdk/delete')
 
+del.deleteSystemNode(10);
 
-const properties = {"cost":"4"};
-
-helper.deleteRelsByType("TEST").then(function(result) {
-  console.log(result)
-})
 
