@@ -86,6 +86,9 @@ export default function App() {
         <button
           className="m-auto border px-4 py-2 rounded-md bg-white"
           onClick={() => {
+            getGraph().then((res) => {
+              setData(res);
+            });
             setIsHidden(true);
           }}
         >
@@ -107,15 +110,27 @@ export default function App() {
           onClickLink={onClickLink}
         />
 
-        <button
-          className="m-auto border px-4 py-2 border-r"
-          onClick={() => {
-            setCount(count + 1);
-            createPlatformNode();
-          }}
-        >
-          Create Platform Node {count}
-        </button>
+        <div className="flex">
+          <button
+            className="m-auto border px-4 py-2 border-r"
+            onClick={() => {
+              setCount(count + 1);
+              createPlatformNode();
+            }}
+          >
+            Create Platform Node
+          </button>
+          <button
+            className="m-auto border px-4 py-2 border-r"
+            onClick={() => {
+              getGraph().then((res) => {
+                setData(res);
+              });
+            }}
+          >
+            Render
+          </button>
+        </div>
       </div>
     </div>
   );
